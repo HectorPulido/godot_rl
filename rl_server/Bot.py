@@ -66,9 +66,15 @@ class Bot:
         return action
 
     def _add_session(self):
-        np.append(self.batch_states, self.current_session_data["env_data"].copy())
-        np.append(self.batch_actions, self.current_session_data["input"].copy())
-        np.append(self.batch_rewards, self.current_session_data["reward"])
+        self.batch_states = np.append(
+            self.batch_states, self.current_session_data["env_data"].copy()
+        )
+        self.batch_actions = np.append(
+            self.batch_actions, self.current_session_data["input"].copy()
+        )
+        self.batch_rewards = np.append(
+            self.batch_rewards, self.current_session_data["reward"]
+        )
         self.sessions.append(self.current_session_data.copy())
 
         self._save_dataset("sessions.npy")
