@@ -37,12 +37,12 @@ Before you begin, ensure you have met the following requirements:
 1. Clone this GitHub repository to your local machine:
 
    ```bash
-   git clone https://github.com/your-username/rl-godot.git
+   git clone git@github.com:HectorPulido/godot_rl.git
    ```
 
-2. Open the `godot` folder in the Godot Engine editor.
+2. Open the `rl_client` folder in the Godot Engine editor.
 
-3. Start exploring the examples provided in the `godot` directory to understand how to integrate Python's RL logic with Godot using C# scripts.
+3. Explore.
 
 ## Usage
 
@@ -64,6 +64,24 @@ You can touch the code in Bot class to change the algorithm.
 
 Contributions to this project are welcome! If you have any ideas, bug fixes, or improvements, please open an issue or submit a pull request.
 
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
+<div align="center">
+<h3 align="center">Let's connect 😋</h3>
+</div>
+<p align="center">
+<a href="https://www.linkedin.com/in/hector-pulido-17547369/" target="blank">
+<img align="center" width="30px" alt="Hector's LinkedIn" src="https://www.vectorlogo.zone/logos/linkedin/linkedin-icon.svg"/></a> &nbsp; &nbsp;
+<a href="https://twitter.com/Hector_Pulido_" target="blank">
+<img align="center" width="30px" alt="Hector's Twitter" src="https://www.vectorlogo.zone/logos/twitter/twitter-official.svg"/></a> &nbsp; &nbsp;
+<a href="https://www.twitch.tv/hector_pulido_" target="blank">
+<img align="center" width="30px" alt="Hector's Twitch" src="https://www.vectorlogo.zone/logos/twitch/twitch-icon.svg"/></a> &nbsp; &nbsp;
+<a href="https://www.youtube.com/channel/UCS_iMeH0P0nsIDPvBaJckOw" target="blank">
+<img align="center" width="30px" alt="Hector's Youtube" src="https://www.vectorlogo.zone/logos/youtube/youtube-icon.svg"/></a> &nbsp; &nbsp;
+
+</p>
+
