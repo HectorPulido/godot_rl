@@ -64,6 +64,12 @@ You can touch the code in Bot class to change the algorithm.
 
 Contributions to this project are welcome! If you have any ideas, bug fixes, or improvements, please open an issue or submit a pull request.
 
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
 <div align="center">
 <h3 align="center">Let's connect 😋</h3>
 </div>
@@ -79,7 +85,3 @@ Contributions to this project are welcome! If you have any ideas, bug fixes, or 
 
 </p>
 
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
