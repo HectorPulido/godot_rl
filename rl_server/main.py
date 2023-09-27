@@ -6,7 +6,7 @@ from Bot import Bot
 
 bot = None
 
-sample_size = 100
+sample_size = 200
 percentile = 70
 last_threshold = -999
 sticky_action_value = 5

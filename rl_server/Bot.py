@@ -38,9 +38,9 @@ class Bot:
         self.batch = 0
         self.iterations = 0
         self.current_session_data = {"env_data": [], "input": [], "reward": 0}
-        self.batch_states = np.array([])
-        self.batch_actions = np.array([])
-        self.batch_rewards = np.array([])
+        self.batch_states = []
+        self.batch_actions = []
+        self.batch_rewards = []
 
         self.last_action = None
 
@@ -66,15 +66,9 @@ class Bot:
         return action
 
     def _add_session(self):
-        self.batch_states = np.append(
-            self.batch_states, self.current_session_data["env_data"].copy()
-        )
-        self.batch_actions = np.append(
-            self.batch_actions, self.current_session_data["input"].copy()
-        )
-        self.batch_rewards = np.append(
-            self.batch_rewards, self.current_session_data["reward"]
-        )
+        self.batch_states.append(self.current_session_data["env_data"].copy())
+        self.batch_actions.append(self.current_session_data["input"].copy())
+        self.batch_rewards.append(self.current_session_data["reward"])
         self.sessions.append(self.current_session_data.copy())
 
         self._save_dataset("sessions.npy")
@@ -154,8 +148,7 @@ class Bot:
             np.percentile(self.batch_rewards, self.percentile), self.last_threshold
         )
         self.last_threshold = threshold
-        threshold_condition = self.batch_rewards >= threshold
-
+        threshold_condition = np.array(self.batch_rewards) >= threshold
         elite_states, elite_actions, elite_rewards = self._mask_session(
             self.batch_states,
             self.batch_actions,
