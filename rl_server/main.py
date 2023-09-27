@@ -8,7 +8,7 @@ bot = None
 
 sample_size = 50
 percentile = 70
-last_threshold = 0
+last_threshold = -999
 sticky_action_value = 5
 
 

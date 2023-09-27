@@ -73,11 +73,12 @@ class Bot:
 
         self._save_dataset("sessions.npy")
 
-
     def _mask_session(self, session_states, session_actions, session_rewards, mask):
         states, actions, rewards = [], [], []
 
-        for states_batch, actions_batch, reward, valid_threshold in zip(session_states, session_actions, session_rewards, mask):
+        for states_batch, actions_batch, reward, valid_threshold in zip(
+            session_states, session_actions, session_rewards, mask
+        ):
             if valid_threshold:
                 for state, action in zip(states_batch, actions_batch):
                     states.append(state)
@@ -120,32 +121,40 @@ class Bot:
         actions = np.asarray(actions)
         rewards = np.asarray(rewards)
 
-        normalized_rewards = (rewards - min(rewards)) / (max(rewards) - min(rewards))  # Normalize rewards to the range of 0 to 1
-    
-        repeat_times = np.round(normalized_rewards*10).astype(int)  # Multiply normalized reward by 10 and round it, this will be our repeat times
+        normalized_rewards = (rewards - min(rewards)) / (
+            max(rewards) - min(rewards)
+        )  # Normalize rewards to the range of 0 to 1
+
+        repeat_times = np.round(normalized_rewards * 10).astype(
+            int
+        )  # Multiply normalized reward by 10 and round it, this will be our repeat times
 
         augmented_states = []
         augmented_actions = []
-        
+
         for state, action, times in zip(states, actions, repeat_times):
             for _ in range(times):
-                augmented_states.append(state + np.random.normal(0, noise_factor, states.shape[1]))
+                augmented_states.append(
+                    state + np.random.normal(0, noise_factor, states.shape[1])
+                )
                 augmented_actions.append(action)
-                
+
         augmented_states = np.around(np.array(augmented_states), decimals=3)
         augmented_actions = np.array(augmented_actions)
         return augmented_states, augmented_actions
 
     def train(self):
-        threshold = self._clamp_min(np.percentile(self.batch_rewards, self.percentile), self.last_threshold)
+        threshold = self._clamp_min(
+            np.percentile(self.batch_rewards, self.percentile), self.last_threshold
+        )
         self.last_threshold = threshold
         threshold_condition = self.batch_rewards >= threshold
 
         elite_states, elite_actions, elite_rewards = self._mask_session(
-            self.batch_states, 
-            self.batch_actions, 
-            self.batch_rewards, 
-            threshold_condition
+            self.batch_states,
+            self.batch_actions,
+            self.batch_rewards,
+            threshold_condition,
         )
 
         elite_states_concat, elite_actions_concat = self.augment_dataset(
@@ -168,10 +177,15 @@ class Bot:
 
     def _load_dataset(self, path):
         self.sessions = np.load(path, allow_pickle=True).tolist()
-        self.batch_states = np.array([session["env_data"] for session in self.sessions], dtype=object)
-        self.batch_actions = np.array([session["input"] for session in self.sessions], dtype=object)
-        self.batch_rewards = np.array([session["reward"] for session in self.sessions], dtype=object)
-
+        self.batch_states = np.array(
+            [session["env_data"] for session in self.sessions], dtype=object
+        )
+        self.batch_actions = np.array(
+            [session["input"] for session in self.sessions], dtype=object
+        )
+        self.batch_rewards = np.array(
+            [session["reward"] for session in self.sessions], dtype=object
+        )
 
         self.agent.max_iter = 1000
         self.train()
